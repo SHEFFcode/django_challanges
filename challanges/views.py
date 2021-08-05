@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
 from django.urls import reverse
+from django.template.loader import render_to_string
 
 # Create your views here.
 
@@ -46,7 +47,7 @@ def index(request):
 def monthly_challange(request, month):  # <month> was the id in the angle brackets
     try:
         challange_text = monthly_challanges[month]
-        response_data = f'<h1>{challange_text}</h1>'
+        response_data = render_to_string('challanges/challange.html')
         return HttpResponse(response_data)
     except:
         return HttpResponseNotFound('This month is not supported')
